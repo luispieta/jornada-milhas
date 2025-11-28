@@ -39,12 +39,14 @@ export default class PaginaLogin {
     async campoEmailObrigatorio(email: string, mensagem: string) {
         const campoObrigatorio = this.page.getByText(mensagem);
         await this.inputEmail.fill(email);
+        await this.inputSenha.click();
         await expect(campoObrigatorio).toBeVisible();
     }
 
     async formularioEmBranco(email:string, senha: string, mensagem: string) {
         const campoEmBranco = this.page.getByText(mensagem);
         await this.inputEmail.fill(email);
+        await this.inputSenha.click();
         await this.inputSenha.fill(senha);
         await expect(campoEmBranco).toBeVisible();
     } 
