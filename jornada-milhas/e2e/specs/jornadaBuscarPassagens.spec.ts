@@ -1,4 +1,4 @@
-import { test } from "./page-objects/PaginaPrincipal";
+import { test } from "../setup/fixtures";
 
 test.describe("Buscar Passagens", () => {
     test("Deve buscar passagem de somente ida", async ({paginaPrincipal}) => {
@@ -10,16 +10,14 @@ test.describe("Buscar Passagens", () => {
         await paginaPrincipal.definirPassageirosBebes(1);
         await paginaPrincipal.fecharModalPassageiros();
 
+        const dataIda = new Date("06/03");
+
         await paginaPrincipal.preencherOrigemEDestino("minas gerais", "rio de janeiro");
-        await paginaPrincipal.preencherDataIdaEDataVolta(new Date("06/03/2024"));
+        await paginaPrincipal.preencherDataIda(dataIda);
         await paginaPrincipal.buscarPassagens();
 
-        await paginaPrincipal.estaMostrandoPassagem("Somente ida", "Minas Gerai", "Rio de Janeiro");
+        await paginaPrincipal.estaMostrandoPassagem("Somente ida", "Minas Gerai", "Rio de Janeiro", dataIda);
 
     });
 
-    test("Deve buscar passagem de Ida e volta", async ({paginaPrincipal}) => {
-        await paginaPrincipal.visitar();
-
-    });
 });
