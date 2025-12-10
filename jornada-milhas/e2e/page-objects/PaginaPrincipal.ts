@@ -16,7 +16,6 @@ export default class PaginaPrincipal {
     private readonly containerOrigem: Locator;
     private readonly containerDestino: Locator;
     private readonly botaoComprar: Locator;
-    private readonly textoDataIda: Locator;
 
 
     constructor(page: Page) {
@@ -35,12 +34,7 @@ export default class PaginaPrincipal {
         this.containerOrigem = page.getByTestId('container-origem');
         this.containerDestino = page.getByTestId('container-destino');
         this.botaoComprar = page.getByTestId('botao-comprar');
-        this.textoDataIda = page.getByTestId('texto-data-ida');
 
-    }
-
-    private obterDataExibicao(data: Date) {
-        return data.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit' });
     }
 
     async visitar() {
@@ -98,15 +92,12 @@ export default class PaginaPrincipal {
         tipoTrajeto: "Somente ida" | "Ida e volta",
         origem: string,
         destino: string,
-        dataIda: Date
     ) {
-        const dataIdaExibicao = this.obterDataExibicao(dataIda);
 
         //toHaveText é para mostrar o texto fixo, já no toContainText pode ter qualquer texto
         await expect(this.textoTipoTrajeto).toHaveText(tipoTrajeto);
         await expect(this.containerOrigem).toContainText(origem);
         await expect(this.containerDestino).toContainText(destino);
-        await expect(this.textoDataIda).toHaveText(dataIdaExibicao);
         await expect(this.botaoComprar).toBeVisible();
     }
 

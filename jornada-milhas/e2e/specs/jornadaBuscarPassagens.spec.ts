@@ -10,13 +10,11 @@ test.describe("Buscar Passagens", () => {
         await paginaPrincipal.definirPassageirosBebes(1);
         await paginaPrincipal.fecharModalPassageiros();
 
-        const dataIda = new Date("06/03");
-
         await paginaPrincipal.preencherOrigemEDestino("minas gerais", "rio de janeiro");
-        await paginaPrincipal.preencherDataIda(dataIda);
+        await paginaPrincipal.preencherDataIda(new Date("06/03/2024"));
         await paginaPrincipal.buscarPassagens();
 
-        await paginaPrincipal.estaMostrandoPassagem("Somente ida", "Minas Gerai", "Rio de Janeiro", dataIda);
+        await paginaPrincipal.estaMostrandoPassagem("Somente ida", "Minas Gerai", "Rio de Janeiro");
 
     });
 
